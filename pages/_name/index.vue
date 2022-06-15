@@ -13,6 +13,11 @@
 
 <script>
     export default {
+        head () {
+            return {
+                title: `${ this.$route.params.name }`,
+            }
+        },
         data() {
             return {
                 pkmSprite: {},
