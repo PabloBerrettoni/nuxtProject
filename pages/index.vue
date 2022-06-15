@@ -28,7 +28,6 @@ export default {
       let pokeFetch = await this.$axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offsetValue}`);
       for ( let pokemon of pokeFetch.data.results ) {
           let pokemonData = await this.$axios.get(pokemon.url);
-          console.log(pokemonData)
           let pkm = {
               name: pokemon.name,
               sprite: pokemonData.data.sprites.front_default,
