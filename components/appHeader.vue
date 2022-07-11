@@ -3,7 +3,7 @@
         <h1 class="title">PokeApi</h1>
         <ul>
             <li>
-                <nuxt-link to="/"> Home </nuxt-link>
+                <nuxt-link @click.native="{ watchReload }" to="/" > Home </nuxt-link>
             </li>
         </ul>
     </header>
@@ -11,7 +11,12 @@
 
 <script>
     export default {
-        name: "appHeader"
+        name: "appHeader",
+        methods: {
+            watchReload() {
+                this.$router.push('/')
+            }
+        }
     }
 </script>
 

@@ -4,7 +4,7 @@
             <h2 class="pokeName"> {{ name }} </h2>
             <p> {{ type1 }} </p>
             <p> {{ type2 }} </p>
-            <nuxt-link :to="'/' + name"> <p>See more</p> </nuxt-link>
+            <nuxt-link :to="'/detail/' + name"> <p>See more</p> </nuxt-link>
         </div>
 </template>
 
