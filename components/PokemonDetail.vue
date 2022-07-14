@@ -1,13 +1,18 @@
 <template>
     <div>
-        <img :src=" pokemons[0] ? pokemons[0].pkmSprite : null "/>
-        <p> Name: {{ pokemons[0] ? pokemons[0].pkmName : null }} </p>
-        <p> Type1: {{ pokemons[0] ? pokemons[0].pkmType1 : null }} </p>
-        <p> Type2: {{ pokemons[0] ? pokemons[0].pkmType2 : '-' }} </p>
-        <p> Health: {{ pokemons[0] ? pokemons[0].pkmHealth : null }} </p>
-        <p> Attack: {{ pokemons[0] ? pokemons[0].pkmAttack : null }} </p>
-        <p> Defense: {{ pokemons[0] ? pokemons[0].pkmDefense : null }} </p>
-        <p> Speed: {{ pokemons[0] ? pokemons[0].pkmSpeed : null }} </p>
+        <div v-if="succeded[0] == 200">
+            <img :src=" pokemons[0].pkmSprite "/>
+            <p> Name: {{ pokemons[0].pkmName  }} </p>
+            <p> Type1: {{ pokemons[0].pkmType1  }} </p>
+            <p> Type2: {{ pokemons[0] ? pokemons[0].pkmType2 : '-' }} </p>
+            <p> Health: {{ pokemons[0].pkmHealth  }} </p>
+            <p> Attack: {{ pokemons[0].pkmAttack  }} </p>
+            <p> Defense: {{ pokemons[0].pkmDefense  }} </p>
+            <p> Speed: {{ pokemons[0].pkmSpeed  }} </p>
+        </div>
+        <div v-else>
+            <h2>No se encontró el pokemon que buscaste</h2>
+        </div>
     </div>
 </template>
 
@@ -21,7 +26,8 @@
         },
         data() {
             return {
-                pokemons: []
+                pokemons: [],
+                succeded: []
             };
         },
         async created() {
@@ -39,8 +45,10 @@
                     pkmSpeed: pokeFetch.data.stats[5].base_stat
                 };
                 this.pokemons.push(newPKM);
+                this.succeded.push('200');
                 console.log(this.pokemons)
             } catch(error) {
+                this.succeded.push('404');
                 console.log('error: ' + error);
             };
         }
