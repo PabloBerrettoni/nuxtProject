@@ -20,7 +20,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 
 .header {
   display: flex;
@@ -30,14 +30,14 @@
   padding-bottom: 1rem;
   border-bottom: 1px dotted #ccc;
 }
-.header .title {
+.title {
   font-size: 3rem;
   color: #526488;
 }
-.header ul {
+ul {
   display: flex;
 }
-.header a {
+a {
   display: inline-block;
   background: #333;
   color: #fff;

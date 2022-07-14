@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Header :key="$route.fullPath"/>        
-        <Search v-on:search-text="searchText"/>
+        <AppHeader :key="$route.fullPath"/>        
+        <Search/>
         <h2>Welcome to my PokeApi project with Nuxt</h2>
         <PokeFetch/>
     </div>
@@ -9,12 +9,12 @@
 
 <script>
 import Search from '../components/Search';
-import Header from '../components/AppHeader';
+import AppHeader from '../components/AppHeader';
 export default {
-  name: 'PokeApi with Nuxt',
+  name: 'PokeApi',
   components: {
     Search,
-    Header
+    AppHeader
   }
 }
 </script>
