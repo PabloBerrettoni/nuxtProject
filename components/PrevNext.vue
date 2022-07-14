@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <p v-show="offsetNext[0] > 9" v-on:click="prev()">previous</p>
+        <p v-show="offset > 0" v-on:click="prevNext()">previous</p>
         <p></p>
-        <p v-on:click="next()">next</p>
+        <p v-on:click="prevNext(1)">next</p>
     </div>
 </template>
 
@@ -10,21 +10,17 @@
 export default {
     data() {
         return {
-            offsetNext: [],
-            offsetPrev: []
+            offset: 0
         }
     },
     methods: {
-        next() {
-            this.offsetNext[0]=+ 10;
-            this.offsetNext.push(this.offsetNext[0])
-            this.$emit('clickNext', this.offsetNext[0]);
-            this.offsetPrev[0] =+ 10;
-        },
-        prev() {
-            this.offsetPrev[0] =- 10;
-            this.$emit('clickNext', this.offsetPrev[0]);
-            this.offsetNext[0] =- 10;
+        prevNext(operation) {
+            if (operation) {
+                this.offset = this.offset + 10;
+            } else {
+                this.offset = this.offset - 10;
+            }
+            this.$emit('clickNext', this.offset);
         }
     },
 }
