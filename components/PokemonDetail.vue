@@ -31,7 +31,6 @@
             };
         },
         async created() {
-            console.log('ruta: ' + this.$route.params)
             try {
                 let pokeFetch = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pkmGetData}`);
                 let newPKM = {
@@ -46,7 +45,6 @@
                 };
                 this.pokemons.push(newPKM);
                 this.succeded.push('200');
-                console.log(this.pokemons)
             } catch(error) {
                 this.succeded.push('404');
                 console.log('error: ' + error);

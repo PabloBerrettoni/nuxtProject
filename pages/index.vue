@@ -6,12 +6,8 @@
 </template>
 
 <script>
-import Search from '../components/Search';
 export default {
-  name: 'PokeApi',
-  components: {
-    Search,
-  }
+  name: 'PokeApi'
 }
 </script>
 

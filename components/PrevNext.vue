@@ -1,25 +1,42 @@
 <template>
-    <div>
-        
+    <div class="container">
+        <p v-show="offset.next > 9" v-on:click="prev()">previous</p>
+        <p></p>
+        <p v-on:click="next()">next</p>
     </div>
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
-
 export default {
-    setup () {
-        const state = reactive({
-            count: 0,
-        })
-    
+    data() {
         return {
-            ...toRefs(state),
+            offset: [{ "next": 0 }, 'previous']
         }
-    }
+    },
+    methods: {
+        next() {
+            this.offset[0].next =+ 10;
+            this.$emit('clickNext', this.offset.next);
+            this.offset.previous =+ 10;
+            console.log(this.offset[0].next)
+        },
+        prev() {
+            this.offset.previous =- 10;
+            this.$emit('clickNext', this.offset.previous);
+            this.offset.next =- 10;
+        }
+    },
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+p {
+    margin: 5px;
+}
 </style>

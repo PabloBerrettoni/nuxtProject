@@ -1,27 +1,23 @@
 <template>
     <div>
         <div class="pokeCardsHolder">
-            <Pokemon v-for="pokemon in pokemons" :key="pokemon.name" :sprite="pokemon.sprite" :name="pokemon.name" :type1="pokemon.type1" :type2="pokemon.type2 ? pokemon.type2 : '-'" />
+            <PokeCard v-for="pokemon in pokemons" :key="pokemon.name" :sprite="pokemon.sprite" :name="pokemon.name" :type1="pokemon.type1" :type2="pokemon.type2 ? pokemon.type2 : '-'" />
         </div>
+        <PrevNext @clickNext="updateOffset"/>
     </div>
 </template>
 
 <script>
-import Pokemon from './PokeCard';
 export default {
-    components: {
-        Pokemon
-    },
-
     data() {
         return {
             pokemons: [],
+            currentOffset: []
         }
     },
     async created() {
         try {
-            let offsetValue = 0;
-            let pokeFetch = await this.$axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offsetValue}`);
+            let pokeFetch = await this.$axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=10&offset=${this.currentOffset[0]}`);
             for (let pokemon of pokeFetch.data.results) {
                 let pokemonData = await this.$axios.get(pokemon.url);
                 let pkm = {
@@ -35,6 +31,15 @@ export default {
         } catch (error) {
             console.log('error: ' + error);
         };
+    },
+    methods: {
+        refresh() {
+            this.$nuxt.refresh()
+        },
+        updateOffset(variable) {
+            this.currentOffset[0] = variable;
+            this.currentOffset.push(this.currentOffset[0]);
+        },
     }
 }
 </script>
