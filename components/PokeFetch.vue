@@ -4,7 +4,7 @@
             <PokeCard v-for="pokemon in pokemons" :key="pokemon.name" :sprite="pokemon.sprite" :name="pokemon.name"
                 :type1="pokemon.type1" :type2="pokemon.type2 ? pokemon.type2 : '-'" />
         </div>
-        <PrevNext @clickNext="getDataOnOffset" />
+        <PrevNext @prevNext="getDataOnOffset" />
     </div>
 </template>
 
@@ -19,9 +19,6 @@ export default {
         this.getDataOnOffset(0)
     },
     methods: {
-        refresh() {
-            this.$nuxt.refresh()
-        },
         async getDataOnOffset(offset) {
             try {
                 this.pokemons = []
