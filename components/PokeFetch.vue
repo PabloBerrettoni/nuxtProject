@@ -39,6 +39,7 @@ export default {
         updateOffset(variable) {
             this.currentOffset[0] = variable;
             this.currentOffset.push(this.currentOffset[0]);
+            console.log(this.currentOffset[0])
         },
     }
 }
