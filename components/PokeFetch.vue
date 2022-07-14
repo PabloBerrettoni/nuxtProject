@@ -41,7 +41,7 @@ export default {
 
 <style>
 
-    .pokeCardsHolder {
+.pokeCardsHolder {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;

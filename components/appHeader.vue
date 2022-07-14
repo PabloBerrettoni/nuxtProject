@@ -18,16 +18,27 @@
 <style scoped>
 
 .header {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px dotted #ccc;
+  background-color: #333;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  width: 100%;
 }
 .title {
-  font-size: 3rem;
-  color: #526488;
+  color: #f2f2f2;
+  float: left;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  margin-left: 15px;
+  overflow: hidden;
+}
+.title:hover {
+  background-color: #dc2f02;
 }
 ul {
   display: flex;

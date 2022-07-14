@@ -1,6 +1,5 @@
 <template>
     <div>
-        <AppHeader :key="$route.fullPath"/>
         <PokemonDetail :pkmGetData="pkm"/>
     </div>
 </template>

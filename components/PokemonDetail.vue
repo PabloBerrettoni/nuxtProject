@@ -4,7 +4,7 @@
             <img :src=" pokemons[0].pkmSprite "/>
             <p> Name: {{ pokemons[0].pkmName  }} </p>
             <p> Type1: {{ pokemons[0].pkmType1  }} </p>
-            <p> Type2: {{ pokemons[0] ? pokemons[0].pkmType2 : '-' }} </p>
+            <p> Type2: {{ pokemons[0].pkmType2 }} </p>
             <p> Health: {{ pokemons[0].pkmHealth  }} </p>
             <p> Attack: {{ pokemons[0].pkmAttack  }} </p>
             <p> Defense: {{ pokemons[0].pkmDefense  }} </p>
@@ -38,7 +38,7 @@
                     pkmSprite: pokeFetch.data.sprites.front_default,
                     pkmName: pokeFetch.data.name,
                     pkmType1: pokeFetch.data.types[0].type.name,
-                    pkmType2: pokeFetch.data.types[1] ? pokeFetch.data.types[1].type.name : undefined,
+                    pkmType2: pokeFetch.data.types[1] ? pokeFetch.data.types[1].type.name : '-',
                     pkmHealth: pokeFetch.data.stats[0].base_stat,
                     pkmAttack: pokeFetch.data.stats[1].base_stat,
                     pkmDefense: pokeFetch.data.stats[2].base_stat,
@@ -55,6 +55,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+
 
 </style>
