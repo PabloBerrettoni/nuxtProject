@@ -1,6 +1,6 @@
 <template>
         <div class="pokeCard">
-            <img :src=sprite />
+            <img id="img" :src=sprite v-on:change="bgColor"/>
             <div class="text">
                 <h2 class="pokeName"> {{ name }} </h2>
                 <p> {{ type1 }} </p>
@@ -14,6 +14,25 @@
     export default {
         name: 'Pokemon',
         props: ['sprite' , 'name', 'type1', 'type2'],
+        created() {
+            let pokeCardBG = document.querySelector('#img');
+            /* for (let pokeImg of pokeCardBG) {
+                switch (pokeImg) {
+                case 'grass':
+                    pokeCardBG.style.backgroundColor = "#4DAD5B"                        
+                    break;
+                case 'fire':
+                    pokeCardBG.style.backgroundColor = "#bc6c25"                        
+                    break;
+                case 'water':
+                    pokeCardBG.style.backgroundColor = "#1B53BA"                        
+                    break;
+                default:
+                    pokeCardBG.style.backgroundColor = "#919191"   
+                    break;
+                }
+            } */
+        },
     }
 </script>
 
@@ -34,7 +53,6 @@
     }
     .pokeCard img {
         width: 250px;
-        background-color: #bc6c25;
         border-radius: 5px;
     }
     .text {

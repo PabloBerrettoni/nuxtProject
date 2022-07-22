@@ -16,7 +16,7 @@ export default {
         }
     },
     async created() {
-        this.getDataOnOffset(0)
+        this.getDataOnOffset(0);
     },
     methods: {
         async getDataOnOffset(offset) {
@@ -46,5 +46,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    min-height: 80vh;
 }
 </style>
