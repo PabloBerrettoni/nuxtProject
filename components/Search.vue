@@ -15,8 +15,8 @@
         },
         methods: {
             onSubmit() {
-                this.$emit('search-text', this.text);
-                this.$router.push(`/search/${this.text}`)
+                this.$emit('search-text', this.text.toLowerCase());
+                this.$router.push(`/search/${this.text.toLowerCase()}`)
                 this.text="";
             }
         }

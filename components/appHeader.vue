@@ -1,9 +1,8 @@
 <template>
     <header class="header">
-        <h1 class="title">PokeApi</h1>
         <ul>
-            <li>
-                <nuxt-link to="/" > Home </nuxt-link>
+            <li class="title">
+                <nuxt-link to="/" > PokeApi </nuxt-link>
             </li>
         </ul>
     </header>
@@ -36,9 +35,6 @@
   font-size: 17px;
   margin-left: 15px;
   overflow: hidden;
-}
-.title:hover {
-  background-color: #dc2f02;
 }
 ul {
   display: flex;

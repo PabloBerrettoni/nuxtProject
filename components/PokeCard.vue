@@ -1,6 +1,6 @@
 <template>
         <div class="pokeCard">
-            <img id="img" :src=sprite v-on:change="bgColor"/>
+            <img id="img" :src=sprite />
             <div class="text">
                 <h2 class="pokeName"> {{ name }} </h2>
                 <p> {{ type1 }} </p>
@@ -14,25 +14,58 @@
     export default {
         name: 'Pokemon',
         props: ['sprite' , 'name', 'type1', 'type2'],
-        created() {
-            let pokeCardBG = document.querySelector('#img');
-            /* for (let pokeImg of pokeCardBG) {
-                switch (pokeImg) {
-                case 'grass':
-                    pokeCardBG.style.backgroundColor = "#4DAD5B"                        
-                    break;
-                case 'fire':
-                    pokeCardBG.style.backgroundColor = "#bc6c25"                        
-                    break;
-                case 'water':
-                    pokeCardBG.style.backgroundColor = "#1B53BA"                        
-                    break;
-                default:
-                    pokeCardBG.style.backgroundColor = "#919191"   
-                    break;
+        mounted() {
+            let allPokeCards = document.querySelectorAll('.pokeCard');
+            for (let pokeCardAvailable of allPokeCards) {
+                switch (pokeCardAvailable.lastChild.childNodes[2].innerText) {
+                    case 'grass':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#4DAD5B"
+                        break;
+                    case 'fire':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#EE8130"   
+                        break;
+                    case 'water':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#1B53BA"           
+                        break;
+                    case 'bug':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#A6B91A"           
+                        break;
+                    case 'poison':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#A33EA1"           
+                        break;
+                    case 'electric':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#F7D02C"           
+                        break;
+                    case 'ground':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#E2BF65"           
+                        break;
+                    case 'fairy':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#D685AD"           
+                        break;
+                    case 'fighting':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#C22E28"           
+                        break;
+                    case 'psychic':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#F95587"           
+                        break;
+                    case 'rock':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#B6A136"           
+                        break;
+                    case 'ghost':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#735797"           
+                        break;
+                    case 'ice':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#96D9D6"           
+                        break;
+                    case 'dragon':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#6F35FC"           
+                        break;
+                    default:
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#A8A77A"   
+                        break;
                 }
-            } */
-        },
+            }
+        }
     }
 </script>
 
@@ -52,6 +85,7 @@
         max-width: 350px;
     }
     .pokeCard img {
+        background-color: #A8A77A;
         width: 250px;
         border-radius: 5px;
     }
@@ -64,7 +98,7 @@
             min-width: 350px;
         }
         .pokeCard img {
-            background-color: #bc6c25;
+            background-color: #A8A77A;
             border: none;
             width: 60%;
             height: 100%;

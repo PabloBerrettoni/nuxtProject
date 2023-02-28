@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-pagination">
         <button v-show="offset > 9" v-on:click="prevNext()">previous</button>
         <p></p>
         <button v-on:click="prevNext(1)">next</button>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.container-pagination {
     display: flex;
     flex-direction: row;
     justify-content: center;

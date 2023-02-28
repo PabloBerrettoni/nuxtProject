@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-footer">
         <h3>PokeFooter</h3>
     </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped>
-.container{
+.container-footer{
     height: 100px;
     background-color: #333;
     margin: 10px 0 0 0;
