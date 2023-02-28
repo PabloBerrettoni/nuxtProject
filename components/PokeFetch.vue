@@ -22,7 +22,7 @@ export default {
         async getDataOnOffset(offset) {
             try {
                 this.pokemons = []
-                let pokeFetch = await this.$axios.get(`http://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offset}`);
+                let pokeFetch = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offset}`);
                 for (let pokemon of pokeFetch.data.results) {
                     let pokemonData = await this.$axios.get(pokemon.url);
                     let pkm = {
