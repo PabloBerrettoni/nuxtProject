@@ -1,6 +1,12 @@
 # nuxtProject
 
-## Build Setup
+## Docker Setup
+
+```bash
+$ docker-compose up
+```
+
+## Dev Setup
 
 ```bash
 # install dependencies
