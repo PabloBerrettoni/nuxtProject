@@ -73,7 +73,7 @@
             try {
                 let pokeFetch = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pkmGetData}`);
                 let newPKM = {
-                    pkmSprite: pokeFetch.data.sprites.front_default,
+                    pkmSprite: pokeFetch.data.sprites.other.dream_world.front_default,
                     pkmName: pokeFetch.data.name,
                     pkmType1: pokeFetch.data.types[0].type.name,
                     pkmType2: pokeFetch.data.types[1] ? pokeFetch.data.types[1].type.name : '-',
@@ -164,8 +164,8 @@
     flex-direction: column;
 }
 .left-sprite img {
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
 }
 .name-class {
     display: flex;

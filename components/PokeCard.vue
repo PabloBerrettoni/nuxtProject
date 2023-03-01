@@ -2,7 +2,7 @@
         <div class="pokeCard">
             <img id="img" :src=sprite />
             <div class="text">
-                <h2 class="pokeName"> {{ name }} </h2>
+                <h4 class="pokeName"> {{ name }} </h4>
                 <p> {{ type1 }} </p>
                 <p> {{ type2 }} </p>
                 <nuxt-link :to="'/detail/' + name"> <p>See more</p> </nuxt-link>
