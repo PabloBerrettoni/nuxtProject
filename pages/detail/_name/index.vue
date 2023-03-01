@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="poke-detail-view-main">
         <PokemonDetail :pkmGetData="pkm"/>
     </div>
 </template>
@@ -15,9 +15,5 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-}
+
 </style>

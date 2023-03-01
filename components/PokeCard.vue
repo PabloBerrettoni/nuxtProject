@@ -30,6 +30,9 @@
                     case 'bug':
                         pokeCardAvailable.firstChild.style.backgroundColor = "#A6B91A"           
                         break;
+                    case 'flying':
+                        pokeCardAvailable.firstChild.style.backgroundColor = "#A98FF3"           
+                        break;
                     case 'poison':
                         pokeCardAvailable.firstChild.style.backgroundColor = "#A33EA1"           
                         break;
@@ -60,7 +63,7 @@
                     case 'dragon':
                         pokeCardAvailable.firstChild.style.backgroundColor = "#6F35FC"           
                         break;
-                    default:
+                    default:   
                         pokeCardAvailable.firstChild.style.backgroundColor = "#A8A77A"   
                         break;
                 }

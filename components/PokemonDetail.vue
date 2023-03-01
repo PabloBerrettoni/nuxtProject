@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pokemon-detail-view">
         <div v-if="succeded[0] == 200" class="container-pokemon-detail">
             <div class="left-sprite">
                 <img :src=" pokemons[0].pkmSprite " id="sprite-contained" />
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div v-else>
+        <div v-else class="container-pokemon-detail">
             <h2>No se encontró el pokemon que buscaste</h2>
         </div>
     </div>
@@ -88,58 +88,6 @@
                 this.succeded.push('404');
                 console.log('error: ' + error);
             };
-        },
-        mounted() {
-            /* let pokemonEl = document.querySelectorAll('.left-sprite');
-            console.log(pokemonEl)
-            let type1val = this.pokemons
-            switch (type1val) {
-                case 'grass':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#4DAD5B"
-                    break;
-                case 'fire':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#EE8130"   
-                    break;
-                case 'water':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#1B53BA"           
-                    break;
-                case 'bug':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#A6B91A"           
-                    break;
-                case 'poison':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#A33EA1"           
-                    break;
-                case 'electric':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#F7D02C"           
-                    break;
-                case 'ground':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#E2BF65"           
-                    break;
-                case 'fairy':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#D685AD"           
-                    break;
-                case 'fighting':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#C22E28"           
-                    break;
-                case 'psychic':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#F95587"           
-                    break;
-                case 'rock':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#B6A136"           
-                    break;
-                case 'ghost':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#735797"           
-                    break;
-                case 'ice':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#96D9D6"           
-                    break;
-                case 'dragon':
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#6F35FC"           
-                    break;
-                default:
-                    pokeCardAvailable.firstChild.style.backgroundColor = "#A8A77A"   
-                    break;
-            } */
         }
     }
 </script>
@@ -237,6 +185,31 @@
     margin: 0;
     padding: 0;
     width: 0;
+}
+.container-pokemon-detail {
+    display: flex;
+    justify-content: center;
+    min-height: 91.5vh;
+    margin-top: 7.5vh;
+}
+@media screen and (min-width: 768px) {
+    .container-pokemon-detail {
+        min-height: 92.5vh;
+        margin-top: 6.5vh;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .right-info {
+        width: auto;
+    }
+    .pokemon-detail-view {
+        width: 100%;
+    }
+    .left-sprite img {
+        height: 400px;
+        width: 400px;
+    }
 }
 
 </style>
