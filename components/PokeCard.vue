@@ -16,58 +16,32 @@
         props: ['sprite' , 'name', 'type1', 'type2'],
         mounted() {
             let allPokeCards = document.querySelectorAll('.pokeCard');
+            const typeColors = {
+                grass: '#4DAD5B',
+                fire: '#EE8130',
+                water: '#1B53BA',
+                bug: '#A6B91A',
+                flying: '#A98FF3',
+                poison: '#A33EA1',
+                electric: '#F7D02C',
+                ground: '#E2BF65',
+                fairy: '#D685AD',
+                fighting: '#C22E28',
+                psychic: '#F95587',
+                rock: '#B6A136',
+                ghost: '#735797',
+                ice: '#96D9D6',
+                normal: '#A8A77A',
+                dragon: '#6F35FC'
+            };
             for (let pokeCardAvailable of allPokeCards) {
-                switch (pokeCardAvailable.lastChild.childNodes[2].innerText) {
-                    case 'grass':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#4DAD5B"
-                        break;
-                    case 'fire':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#EE8130"   
-                        break;
-                    case 'water':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#1B53BA"           
-                        break;
-                    case 'bug':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#A6B91A"           
-                        break;
-                    case 'flying':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#A98FF3"           
-                        break;
-                    case 'poison':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#A33EA1"           
-                        break;
-                    case 'electric':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#F7D02C"           
-                        break;
-                    case 'ground':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#E2BF65"           
-                        break;
-                    case 'fairy':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#D685AD"           
-                        break;
-                    case 'fighting':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#C22E28"           
-                        break;
-                    case 'psychic':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#F95587"           
-                        break;
-                    case 'rock':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#B6A136"           
-                        break;
-                    case 'ghost':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#735797"           
-                        break;
-                    case 'ice':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#96D9D6"           
-                        break;
-                    case 'dragon':
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#6F35FC"           
-                        break;
-                    default:   
-                        pokeCardAvailable.firstChild.style.backgroundColor = "#A8A77A"   
-                        break;
-                }
-            }
+                let type = pokeCardAvailable.lastChild.childNodes[2].innerText;
+                if (typeColors[type]) {
+                    pokeCardAvailable.firstChild.style.backgroundColor = typeColors[type];
+                } else {
+                    pokeCardAvailable.firstChild.style.backgroundColor = '#FFFFFF';
+                };
+            };
         }
     }
 </script>

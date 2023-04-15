@@ -35,7 +35,7 @@ export default {
                     if (pokemon.data.types[1] != null && (pokemon.data.types[1].type.name == 'flying' || pokemon.data.types[1].type.name == 'fairy')) {
                         pkm.type1 = pokemon.data.types[1].type.name;
                         pkm.type2 = pokemon.data.types[0].type.name;
-                    }
+                    };
                     this.pokemons.push(pkm);
                 };
             } catch (error) {
