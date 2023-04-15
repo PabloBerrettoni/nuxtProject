@@ -1,18 +1,23 @@
 const express = require('express');
 const app = express();
 const port = 3001;
-const mongoose = require('mongoose');
+const db = require('./db/db.js');
+const cors = require('cors');
+
+// Initializes the database
+db.initializeDatabase();
+
+// Middleware needed for the database
+app.use(express.json());
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Port listening
 app.listen(port, () => {
-    console.log(`App listening on localhost:${port}`);
+    console.log(`App listening on http://localhost:${port}`);
 });
 
 // Setting up router
-const mainRouter = require('./routes/mainRouter');
+const mainRouter = require('./routes/indexRouter');
 app.use('/', mainRouter);
-
-// Connecting to DB
-mongoose.connect('localhost:27017', () => {
-    console.log('Connected to DB!');
-});

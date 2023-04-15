@@ -15,7 +15,7 @@ export default {
             pokemons: []
         }
     },
-    async created() {
+    async mounted() {
         this.getDataOnOffset(0);
     },
     methods: {
@@ -23,17 +23,18 @@ export default {
             try {
                 this.pokemons = []
                 let pokeFetch = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offset}`);
-                for (let pokemon of pokeFetch.data.results) {
-                    let pokemonData = await this.$axios.get(pokemon.url);
+                const promises = pokeFetch.data.results.map(pokemon => this.$axios.get(pokemon.url));
+                const pokemonData = await Promise.all(promises);
+                for (let pokemon of pokemonData) {
                     let pkm = {
-                        name: pokemon.name,
-                        sprite: pokemonData.data.sprites.front_default,
-                        type1: pokemonData.data.types[0].type.name,
-                        type2: pokemonData.data.types[1] ? pokemonData.data.types[1].type.name : undefined
+                        name: pokemon.data.name,
+                        sprite: pokemon.data.sprites.front_default,
+                        type1: pokemon.data.types[0].type.name,
+                        type2: pokemon.data.types[1] ? pokemon.data.types[1].type.name : undefined
                     };
-                    if (pokemonData.data.types[1] != null && (pokemonData.data.types[1].type.name == 'flying' || pokemonData.data.types[1].type.name == 'fairy')) {
-                        pkm.type1 = pokemonData.data.types[1].type.name;
-                        pkm.type2 = pokemonData.data.types[0].type.name;
+                    if (pokemon.data.types[1] != null && (pokemon.data.types[1].type.name == 'flying' || pokemon.data.types[1].type.name == 'fairy')) {
+                        pkm.type1 = pokemon.data.types[1].type.name;
+                        pkm.type2 = pokemon.data.types[0].type.name;
                     }
                     this.pokemons.push(pkm);
                 };
