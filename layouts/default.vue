@@ -1,7 +1,7 @@
 <template>
     <div>
         <AppHeader :key="$route.fullPath"/>  
-        <Nuxt class="container"/>
+        <Nuxt class="nuxt-main-container"/>
         <Footer/>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.nuxt-main-container {
     margin-top: 80px;
 }
 </style>

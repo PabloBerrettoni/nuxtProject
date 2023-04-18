@@ -1,44 +1,54 @@
 <template>
-    <div class="container">
-        <div class="formBox">
-            <div>
-                <h3>Login</h3>
-                <form action="" method="post" class="textForm">
-                    <label for="email">Login: </label>
-                    <input type="email" name="email" id="email">
-                    <label for="password">Password: </label>
-                    <input type="password" name="password" id="password">
-                </form>
-            </div>
-        </div>
+    <div>
+        <h1>Log in</h1>
+        <form @submit.prevent="loginUser">
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="user.email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" v-model="user.password" required>
+
+            <button type="submit">Sign in</button>
+        </form>
+        <div v-if="error" class="error-message">{{ error }}</div>
     </div>
 </template>
 
 <script>
+    import Cookies from 'js-cookie';
     export default {
-        
+        data() {
+            return {
+                user: {
+                    email: '',
+                    password: ''
+                },
+                error: null
+            }
+        },
+        mounted() {
+            if (Cookies.get('jwt')) {
+                alert('You are already logged in!');
+                this.$router.push('/');
+            }
+        },
+        methods: {
+            async loginUser() {
+                try {
+                    const response = await this.$axios.post("http://localhost:3001/loginUser", this.user);
+                    const token = response.data.token;
+                    Cookies.set("jwt", token);
+                    localStorage.setItem('userId', response.data.userId);
+                    await this.$router.push('/');
+                } catch (e) {
+                    console.error(e);
+                    this.error = "Invalid email or password";
+                };
+            }
+        }
     }
 </script>
 
-<style scoped>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.formBox {
-    display: flex;
-    background-color: #333;
-    flex-direction: column;
-    width: 55%;
-    border-radius: 15px;
-    color: white;
-}
-.textForm {
-    margin: 5px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;;
-}
+<style lang="scss" scoped>
+
 </style>

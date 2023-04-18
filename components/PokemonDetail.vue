@@ -2,19 +2,19 @@
     <div class="pokemon-detail-view">
         <div v-if="succeded[0] == 200" class="container-pokemon-detail">
             <div class="left-sprite">
-                <img :src=" pokemons[0].pkmSprite " id="sprite-contained" />
+                <img :src="pokemons[0].pkmSprite" id="sprite-contained" />
             </div>
             <div class="right-info">
                 <div class="name-class">
                     <div class="name-class-inner">
                         <h3>Name</h3>
-                        <p> {{ pokemons[0].pkmName  }} </p>
+                        <p>{{ pokemons[0].pkmName }}</p>
                     </div>
                     <div class="name-class-inner">
                         <h3>Type</h3>
                         <div class="type-spec">
-                            <p> {{ pokemons[0].pkmType1  }} </p>
-                            <p> {{ pokemons[0].pkmType2 }} </p>
+                            <p>{{ pokemons[0].pkmType1 }}</p>
+                            <p>{{ pokemons[0].pkmType2 }}</p>
                         </div>
                     </div>
                 </div>
@@ -23,34 +23,32 @@
                     <div class="stat-individual">
                         <h5>Health: </h5>
                         <div class="stat-length">
-                            <p class="stat-health" :style="{width: pokemons[0].pkmHealth + 'px' }" > {{ pokemons[0].pkmHealth  }}</p>
+                            <p class="stat-health" :style="{width: pokemons[0].pkmHealth + 'px'}">{{ pokemons[0].pkmHealth }}</p>
                         </div>
                     </div>
                     <div class="stat-individual">
                         <h5>Attack: </h5>
                         <div class="stat-length">
-                            <p class="stat-attack" :style="{width: pokemons[0].pkmAttack + 'px' }" > {{ pokemons[0].pkmAttack  }} </p>
+                            <p class="stat-attack" :style="{width: pokemons[0].pkmAttack + 'px'}">{{ pokemons[0].pkmAttack }}</p>
                         </div>
                     </div>
                     <div class="stat-individual">
                         <h5>Defense: </h5>
                         <div class="stat-length">
-                            <p class="stat-defence" :style="{width: pokemons[0].pkmDefense + 'px' }" > {{ pokemons[0].pkmDefense  }} </p>
+                            <p class="stat-defence" :style="{width: pokemons[0].pkmDefense + 'px'}">{{ pokemons[0].pkmDefense }}</p>
                         </div>
                     </div>
                     <div class="stat-individual">
                         <h5>Speed: </h5>
                         <div class="stat-length">
-                            <p class="stat-speed" :style="{width: pokemons[0].pkmSpeed + 'px' }" > {{ pokemons[0].pkmSpeed  }} </p>
+                            <p class="stat-speed" :style="{width: pokemons[0].pkmSpeed + 'px'}">{{ pokemons[0].pkmSpeed }}</p>
                         </div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
         <div v-else class="container-pokemon-detail">
-            <h2>No se encontró el pokemon que buscaste</h2>
+            <h2>Pokemon not found</h2>
         </div>
     </div>
 </template>
@@ -60,7 +58,7 @@
         props: ['pkmGetData'],
         head () {
             return {
-                title: `${ this.pkmGetData }`,
+                title: this.pkmGetData,
             };
         },
         data() {
@@ -76,7 +74,7 @@
                     pkmSprite: pokeFetch.data.sprites.other.dream_world.front_default,
                     pkmName: pokeFetch.data.name,
                     pkmType1: pokeFetch.data.types[0].type.name,
-                    pkmType2: pokeFetch.data.types[1] ? pokeFetch.data.types[1].type.name : '-',
+                    pkmType2: pokeFetch.data.types[1] ? pokeFetch.data.types[1].type.name : '',
                     pkmHealth: pokeFetch.data.stats[0].base_stat,
                     pkmAttack: pokeFetch.data.stats[1].base_stat,
                     pkmDefense: pokeFetch.data.stats[2].base_stat,
@@ -85,8 +83,7 @@
                 this.pokemons.push(newPKM);
                 this.succeded.push('200');
             } catch(error) {
-                this.succeded.push('404');
-                console.log('error: ' + error);
+                console.error(error);
             };
         }
     }
