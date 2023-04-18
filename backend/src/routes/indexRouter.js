@@ -7,8 +7,6 @@ router.get('/', controller.index);
 
 router.post('/userData', controller.userData);
 
-router.post('/userLogout', controller.userLogout);
-
 router.post('/createUser', controller.create);
 
 router.post('/loginUser', controller.login);
