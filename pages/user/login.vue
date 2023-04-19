@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Log in</h1>
+    <div class="login-container">
+        <h1>Sign in</h1>
         <form @submit.prevent="loginUser">
             <label for="email">Email:</label>
             <input type="email" id="email" v-model="user.email" required>
@@ -49,6 +49,52 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 5%;
+    padding: 5px;
+    background-color: #333;;
+}
+input, label {
+    align-self: center;
+    width: 80%;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+}
+input {
+    color: black;
+}
+button {
+    align-self: center;
+    width: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 720px) {
+    form {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    form {
+        width: 20%;
+    }
+}
 
 </style>

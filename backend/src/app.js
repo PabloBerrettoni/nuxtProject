@@ -6,6 +6,11 @@ const db = require('./db/db.js');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+// Enable CORS for all routes
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true
+}));
 // Initializes the database
 db.initializeDatabase();
 
@@ -14,11 +19,6 @@ app.use(express.json());
 
 // Enable cookie-parser
 app.use(cookieParser());
-// Enable CORS for all routes
-app.use(cors({
-    credentials: true,
-    origin: ['http://localhost:3000']
-}));
 
 // Port listening
 app.listen(port, () => {
