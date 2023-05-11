@@ -10,31 +10,30 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-let usersTable = async () => {
+let pokeFavsTable = async () => {
     try {
         const connection = await pool.getConnection();
         await connection.query('USE pokenuxt');
-        const [rows] = await connection.query('SHOW TABLES LIKE "users"');
+        const [rows] = await connection.query('SHOW TABLES LIKE "pokefavs"');
 
         if (rows.length === 0) {
             await connection.query(`
-                CREATE TABLE users (
-                    id INT NOT NULL AUTO_INCREMENT,
-                    email VARCHAR(255) NOT NULL UNIQUE,
-                    username VARCHAR(255) NOT NULL UNIQUE,
-                    password VARCHAR(255) NOT NULL,
+                CREATE TABLE pokefavs (
+                    PK INT NOT NULL AUTO_INCREMENT,
+                    pokeName VARCHAR(255) NOT NULL,
+                    user INT NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    PRIMARY KEY (id)
+                    PRIMARY KEY (PK),
+                    FOREIGN KEY (user) REFERENCES users (id)
                 )
             `);
             console.log('Table created');
         } else {
-            const [fields] = await connection.query('DESCRIBE users');
+            const [fields] = await connection.query('DESCRIBE pokefavs');
             const expectedFields = [
-                { Field: 'id', Type: 'int(11)', Null: 'NO', Key: 'PRI', Default: null, Extra: 'auto_increment' },
-                { Field: 'email', Type: 'varchar(255)', Null: 'NO', Key: '', Default: null, Extra: '' },
-                { Field: 'username', Type: 'varchar(255)', Null: 'NO', Key: '', Default: null, Extra: '' },
-                { Field: 'password', Type: 'varchar(255)', Null: 'NO', Key: '', Default: null, Extra: '' },
+                { Field: 'PK', Type: 'int(11)', Null: 'NO', Key: 'PRI', Default: null, Extra: 'auto_increment' },
+                { Field: 'pokeName', Type: 'varchar(255)', Null: 'NO', Key: '', Default: null, Extra: '' },
+                { Field: 'user', Type: 'int(11)', Null: 'NO', Key: 'MUL', Default: null, Extra: '' },
                 { Field: 'created_at', Type: 'timestamp', Null: 'NO', Key: '', Default: 'CURRENT_TIMESTAMP', Extra: '' }
             ];
 
@@ -47,12 +46,12 @@ let usersTable = async () => {
             });
 
             if (missingFields.length > 0) {
-                await connection.query(`ALTER TABLE users ${missingFields.map(field => `ADD COLUMN ${field.Field} ${field.Type} ${field.Null === 'YES' ? 'NULL' : 'NOT NULL'} ${field.Default ? `DEFAULT ${field.Default}` : ''}`).join(', ')}`);
+                await connection.query(`ALTER TABLE pokefavs ${missingFields.map(field => `ADD COLUMN ${field.Field} ${field.Type} ${field.Null === 'YES' ? 'NULL' : 'NOT NULL'} ${field.Default ? `DEFAULT ${field.Default}` : ''}`).join(', ')}`);
                 console.log('Table updated: added fields');
             }
 
             if (extraFields.length > 0) {
-                await Promise.all(extraFields.map(field => connection.query(`ALTER TABLE users DROP COLUMN ${field.Field}`)));
+                await Promise.all(extraFields.map(field => connection.query(`ALTER TABLE pokefavs DROP COLUMN ${field.Field}`)));
                 console.log('Table updated: removed fields');
             }
         }
@@ -64,5 +63,5 @@ let usersTable = async () => {
 };
 
 module.exports = {
-    usersTable
+    pokeFavsTable
 };

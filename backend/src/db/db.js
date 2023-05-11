@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 const usersTable = require('./usersTable.js');
+const pokefavsTable = require('./pokefavsTable.js');
 require("dotenv").config();
 
 const pool = mysql.createPool({
@@ -13,7 +14,7 @@ const pool = mysql.createPool({
 async function createDatabase() {
     try {
         const connection = await pool.getConnection();
-        await connection.query('CREATE DATABASE IF NOT EXISTS pokenuxt');
+        await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`);
         connection.release();
         console.log('Database created or already exists');
     } catch (err) {
@@ -25,6 +26,7 @@ const initializeDatabase = async () => {
     try {
         await createDatabase();
         await usersTable.usersTable();
+        await pokefavsTable.pokeFavsTable();
     } catch (err) {
         console.error('Error initializing database:', err.message);
     }

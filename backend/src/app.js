@@ -11,6 +11,7 @@ app.use(cors({
     origin: ['http://localhost:3000'],
     credentials: true
 }));
+
 // Initializes the database
 db.initializeDatabase();
 
@@ -28,7 +29,8 @@ app.listen(port, () => {
 // Setting up router
 const mainRouter = require('./routes/indexRouter');
 app.use('/', mainRouter);
- // Adding error handling and logging
+
+// Adding error handling and logging
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).send('Something went wrong!');
