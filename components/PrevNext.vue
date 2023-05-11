@@ -1,8 +1,10 @@
 <template>
     <div class="container-pagination">
-        <button v-show="offset > 9" v-on:click="prevNext()">previous</button>
-        <p></p>
-        <button v-on:click="prevNext(1)">next</button>
+        <button :disabled="offset < 9" v-on:click="prevNext('prev')" class="prevNext">previous</button>
+        <button v-show="offset > 9" @click="prevNext('last')">{{ (offset - 10) / 10 }}</button>
+        <button class="actual">{{ offset / 10 }}</button>
+        <button @click="prevNext('coming')">{{ (offset + 10) / 10}}</button>
+        <button v-on:click="prevNext('next')" class="prevNext">next</button>
     </div>
 </template>
 
@@ -10,15 +12,19 @@
 export default {
     data() {
         return {
-            offset: 0
+            offset: 0,
         }
     },
     methods: {
         prevNext(operation) {
-            if (operation) {
-                this.offset = this.offset + 10;
-            } else {
+            if (operation == 'prev') {
                 this.offset = this.offset - 10;
+            } else if (operation == 'next'){
+                this.offset = this.offset + 10;
+            } else if (operation == 'last') {
+                this.offset = this.offset - 10;
+            } else if (operation == 'coming') {
+                this.offset = this.offset + 10;
             }
             this.$emit('prevNext', this.offset);
         }
@@ -32,12 +38,17 @@ export default {
     flex-direction: row;
     justify-content: center;
     text-align: center;
-}
-p {
-    margin: 5px;
+    gap: 10px;
 }
 button {
-    width: 100px;
+    width: 40px;
     margin-bottom: 10px;
+}
+.prevNext {
+    width: 75px;
+}
+.actual {
+    border-color: #dda15e;
+    border-radius: 5px;
 }
 </style>
