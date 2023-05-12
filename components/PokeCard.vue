@@ -1,7 +1,9 @@
 <template>
         <div class="pokeCard">
-            <img id="img" :src=sprite />
-            <button v-on:click="addPokeFav(name)" class="addPokemon">star</button>
+            <div class="img-button-container">
+                <img id="img" :src=sprite />
+                <button v-on:click="addPokeFav(name)" class="addPokemon">star</button>
+            </div>
             <div class="text">
                 <h4 class="pokeName"> {{ name }} </h4>
                 <p> {{ type1 }} </p>
@@ -56,9 +58,9 @@
             for (let pokeCardAvailable of allPokeCards) {
                 let type = pokeCardAvailable.lastChild.childNodes[2].innerText;
                 if (typeColors[type]) {
-                    pokeCardAvailable.firstChild.style.backgroundColor = typeColors[type];
+                    pokeCardAvailable.firstChild.firstChild.style.backgroundColor = typeColors[type];
                 } else {
-                    pokeCardAvailable.firstChild.style.backgroundColor = '#FFFFFF';
+                    pokeCardAvailable.firstChild.firstChild.style.backgroundColor = '#FFFFFF';
                 };
             };
         }
@@ -80,13 +82,24 @@
         align-items: center;
         max-width: 350px;
     }
-    .pokeCard img {
-        background-color: #A8A77A;
+    .img-button-container {
+        position: relative;
+        z-index: 0;
         width: 250px;
+    }
+    #img {
+        background-color: #A8A77A;
         border-radius: 5px;
+        display: block;
+        width: 100%;
     }
     .text {
         text-align: center;
+    }
+    .addPokemon {
+        position: absolute;
+        right: 5px;
+        top: 5px;
     }
     @media screen and (max-width: 892px) {
         .pokeCard {
