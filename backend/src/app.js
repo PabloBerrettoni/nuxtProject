@@ -7,10 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // Enable CORS for all routes
-app.use(cors({
-    origin: ['http://localhost:3000'],
-    credentials: true
-}));
+app.use(cors());
 
 // Initializes the database
 db.initializeDatabase();

@@ -11,4 +11,6 @@ router.post('/createUser', controller.create);
 
 router.post('/loginUser', controller.login);
 
+router.post('/addPokeFav', controller.addPokeFav);
+
 module.exports = router;

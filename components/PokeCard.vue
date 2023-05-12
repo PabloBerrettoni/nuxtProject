@@ -1,6 +1,7 @@
 <template>
         <div class="pokeCard">
             <img id="img" :src=sprite />
+            <button v-on:click="addPokeFav(name)" class="addPokemon">star</button>
             <div class="text">
                 <h4 class="pokeName"> {{ name }} </h4>
                 <p> {{ type1 }} </p>
@@ -14,6 +15,24 @@
     export default {
         name: 'Pokemon',
         props: ['sprite' , 'name', 'type1', 'type2'],
+        data () {
+            return {
+                pokeFavs: {
+                    pokeName: '',
+                    userId: ''
+                }
+            }
+        },
+        methods: {
+            async addPokeFav (name) {
+                this.pokeFavs = {
+                    pokeName: name,
+                    userId: localStorage.getItem("userId")
+                }
+                console.log(this.pokeFavs)
+                await this.$axios.post(`http://localhost:3001/addPokeFav`, this.pokeFavs);
+            }
+        },
         mounted() {
             let allPokeCards = document.querySelectorAll('.pokeCard');
             const typeColors = {
