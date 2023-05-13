@@ -13,4 +13,6 @@ router.post('/loginUser', controller.login);
 
 router.post('/addPokeFav', controller.addPokeFav);
 
+router.delete('/deletePokeFav', controller.deletePokeFav);
+
 module.exports = router;

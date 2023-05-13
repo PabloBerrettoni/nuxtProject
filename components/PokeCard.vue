@@ -54,7 +54,7 @@
                     return;
                 }
 
-                // defininf the body for posting to the backend with the necessary information
+                // defining the body for posting to the backend with the necessary information
                 this.pokeFavs = {
                     pokeName: name,
                     userId: localStorage.getItem("userId")
@@ -62,8 +62,8 @@
 
                 // updating the pokemon to the list of favourites
                 let pokeFavsUser = localStorage.getItem('pokeFavsUser') ? JSON.parse(localStorage.getItem('pokeFavsUser')) : [];
-                if (pokeFavsUser.includes(this.name)) {
-                    // here goes the delete post to the backend ---
+                if (pokeFavsUser.includes(name)) {
+                    await this.$axios.delete(`http://localhost:3001/deletePokeFav`, { data: this.pokeFavs });
                     pokeFavsUser = pokeFavsUser.filter(item => item !== name);
                 } else {
                     await this.$axios.post(`http://localhost:3001/addPokeFav`, this.pokeFavs);
@@ -82,7 +82,7 @@
         },
         computed: {
             isPokeFav() {
-                // checks in the localstorage if the any of the pokemons is already a favourite and returns true or false
+                // checks in the localstorage if the any of the rendered pokemons is already a favourite and returns true or false
                 const pokeFavsUser = localStorage.getItem("pokeFavsUser") ? JSON.parse(localStorage.getItem("pokeFavsUser")) : '';
                 return pokeFavsUser.includes(this.name);
             },

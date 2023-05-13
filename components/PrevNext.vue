@@ -1,12 +1,12 @@
 <template>
     <div class="container-pagination">
-        <button :disabled="offset < 9" v-on:click="prevNext('prev')" class="prevNext">previous</button>
+        <button :disabled="offset < 9" v-on:click="prevNext('prev')" class="prevNext"> < </button>
         <button v-show="offset > 19" @click="prevNext('last1')" class="secondButton">{{ (offset - 10) / 10 }}</button>
         <button v-show="offset > 9" @click="prevNext('last')">{{ (offset - 10) / 10 + 1 }}</button>
         <button class="actual">{{ offset / 10 + 1 }}</button>
         <button @click="prevNext('coming')">{{ (offset + 10) / 10 + 1 }}</button>
         <button @click="prevNext('coming1')" class="secondButton">{{ (offset + 10) / 10 + 2 }}</button>
-        <button v-on:click="prevNext('next')" class="prevNext">next</button>
+        <button v-on:click="prevNext('next')" class="prevNext"> > </button>
     </div>
 </template>
 

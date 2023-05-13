@@ -185,7 +185,39 @@ module.exports = {
 
     },
 
-    pokeFavsQuery: async (req, res) => {
-
+    deletePokeFav: async (req, res) => {
+        try {
+            const token = req.headers.authorization.split(' ')[1];  // get token from headers
+            const reqUserId = req.body.userId;
+            const pokemonName = req.body.pokeName;
+    
+            if (!token) {
+                return res.status(401).send({message: 'unauthenticated'});
+            };
+    
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // decode and verify token
+    
+            if (!decodedToken) {
+                return res.status(401).send({message: 'unauthenticated'});
+            };
+    
+            let pokenuxtdb = {};
+            pokenuxtdb.delete = (data) => {
+                return new Promise((resolve, reject) => {
+                    pool.query('DELETE FROM pokenuxt.pokefavs WHERE pokeName = ? AND user = ?', [data.pokeName, data.user], (err, results) => {
+                        if (err) {
+                            return reject(err);
+                        }
+                        return resolve(results);
+                    });
+                });
+            };
+    
+            const result = await pokenuxtdb.delete({ pokeName: pokemonName, user: reqUserId });
+    
+            res.json(result);
+        } catch (e) {
+            return res.status(401).send({message: 'error'});
+        };
     }
 }
