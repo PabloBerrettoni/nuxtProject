@@ -2,7 +2,7 @@
         <div class="pokeCard">
             <div class="img-button-container">
                 <img id="img" :src=sprite />
-                <img src="../assets/images/pokeball.svg" @click="addPokeFav(name, $event);" class="addPokemon" :class="{ 'pokeFav': isPokeFav }" id="pokePng" />
+                <img src="../assets/images/pokeball.svg" @click="addPokeFav(name, $event);" class="addPokemon" :style="{ opacity: isPokeFav ? 1 : 0.25 }" id="pokePng" />
             </div>
             <div class="text">
                 <h4 class="pokeName"> {{ name }} </h4>
@@ -52,13 +52,13 @@
                 if (!Cookies.get("jwt")) {
                     alert("You are not logged in!");
                     return;
-                }
+                };
 
                 // defining the body for posting to the backend with the necessary information
                 this.pokeFavs = {
                     pokeName: name,
                     userId: localStorage.getItem("userId")
-                }
+                };
 
                 // updating the pokemon to the list of favourites
                 let pokeFavsUser = localStorage.getItem('pokeFavsUser') ? JSON.parse(localStorage.getItem('pokeFavsUser')) : [];
@@ -68,7 +68,7 @@
                 } else {
                     await this.$axios.post(`http://localhost:3001/addPokeFav`, this.pokeFavs);
                     pokeFavsUser.push(name);
-                }
+                };
                 localStorage.setItem('pokeFavsUser', JSON.stringify(pokeFavsUser));
 
                 // updating the svg opacity real-time whenever it is clicked
@@ -128,10 +128,6 @@
         position: absolute;
         right: 5px;
         top: 5px;
-    }
-    .pokeFav {
-        opacity: 1 !important;
-        filter: grayscale(0%) !important;
     }
     #img {
         background-color: #A8A77A;

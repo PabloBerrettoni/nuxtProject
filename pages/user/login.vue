@@ -39,8 +39,14 @@
                     const token = response.data.token;
                     Cookies.set("jwt", token);
                     localStorage.setItem('userId', response.data.userId);
-                    //here i should be getting the favourite pokemons from the user to store
                     localStorage.setItem('pokeFavsUser', []);
+
+                    let pokeFavsUser = localStorage.getItem('pokeFavsUser') ? JSON.parse(localStorage.getItem('pokeFavsUser')) : [];
+                    response.data.pokeFavs.forEach(element => {
+                        pokeFavsUser.push(element.pokename);
+                    });
+                    localStorage.setItem('pokeFavsUser', JSON.stringify(pokeFavsUser));
+
                     await this.$router.push('/');
                 } catch (e) {
                     console.error(e);

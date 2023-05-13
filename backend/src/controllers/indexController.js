@@ -95,7 +95,22 @@ module.exports = {
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '999h' });
 
-        res.json({ userId: user.id, token });
+        // Get user's favorite pokemons
+        const pokenuxtdb2 = {};
+        pokenuxtdb2.all = (data) => {
+            return new Promise ((resolve, reject) => {
+                pool.query('SELECT pokename FROM pokefavs WHERE user = ?', [data.user], (err, results) => {
+                    if (err) {
+                        return reject(err);
+                    };
+
+                    return resolve(results);
+                });
+            });
+        };
+        const pokeFavs = await pokenuxtdb2.all({ user: user.id });
+
+        res.json({ userId: user.id, token, pokeFavs });
     },
 
     userData: async (req, res) => {
@@ -146,7 +161,6 @@ module.exports = {
     },
 
     addPokeFav: async (req, res) => {
-
         try {
             const token = req.headers.authorization.split(' ')[1];  // get token from headers
             const reqUserId = req.body.userId;
@@ -216,6 +230,40 @@ module.exports = {
             const result = await pokenuxtdb.delete({ pokeName: pokemonName, user: reqUserId });
     
             res.json(result);
+        } catch (e) {
+            return res.status(401).send({message: 'error'});
+        };
+    },
+
+    indexPokeFav: async (req, res) => {
+        try {
+            const token = req.headers.authorization.split(' ')[1];  // get token from headers
+            const reqUserId = req.body.userId;
+    
+            if (!token) {
+                return res.status(401).send({message: 'unauthenticated'});
+            };
+    
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // decode and verify token
+    
+            if (!decodedToken) {
+                return res.status(401).send({message: 'unauthenticated'});
+            };
+
+            let pokenuxtdb = {};
+            pokenuxtdb.all = (data) => {
+                return new Promise ((resolve, reject) => {
+                    pool.query('SELECT pokename FROM pokefavs WHERE user = ?', [data.user], (err, results) => {
+                        if (err) {
+                            return reject(err);
+                        };
+    
+                        return resolve(results);
+                    });
+                });
+            };
+    
+            res.json (await pokenuxtdb.all({user: reqUserId}));
         } catch (e) {
             return res.status(401).send({message: 'error'});
         };

@@ -11,6 +11,8 @@ router.post('/createUser', controller.create);
 
 router.post('/loginUser', controller.login);
 
+router.get('/indexPokeFav', controller.indexPokeFav);
+
 router.post('/addPokeFav', controller.addPokeFav);
 
 router.delete('/deletePokeFav', controller.deletePokeFav);
