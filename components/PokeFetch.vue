@@ -16,7 +16,13 @@ export default {
         }
     },
     async mounted() {
-        this.getDataOnOffset(0);
+        let lastOffset = localStorage.getItem('lastKnownOffset');
+        if (lastOffset !== null && lastOffset !== 0) {
+            this.lastOffsetKnown = lastOffset;
+            this.getDataOnOffset(lastOffset);
+        } else {
+            this.getDataOnOffset(0);
+        }
     },
     methods: {
         async getDataOnOffset(offset) {
