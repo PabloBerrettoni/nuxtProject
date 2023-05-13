@@ -22,7 +22,7 @@ module.exports = {
                 pool.query('SELECT * FROM users', (err, results) => {
                     if (err) {
                         return reject(err);
-                    }
+                    };
 
                     return resolve(results);
                 });
@@ -93,7 +93,7 @@ module.exports = {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
 
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '999h' });
 
         res.json({ userId: user.id, token });
     },
@@ -182,6 +182,10 @@ module.exports = {
         } catch (e) {
             return res.status(401).send({message: 'error'});
         };
+
+    },
+
+    pokeFavsQuery: async (req, res) => {
 
     }
 }

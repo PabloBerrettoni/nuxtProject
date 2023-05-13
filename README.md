@@ -10,13 +10,13 @@ $ docker-compose up
 
 ```bash
 # install dependencies
-$ npm install
+$ npm install (using node 16)
 # install backend dependencies in ~/backend
 $ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
-# serve backend with nodemon, listens in port 3001
+# serve backend with nodemon, listens in port 3001 (can change that in the enviroment files)
 $ nodemon
 
 # build for production and launch server

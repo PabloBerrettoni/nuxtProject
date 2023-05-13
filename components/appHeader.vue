@@ -37,12 +37,12 @@
           if (Cookies.get('jwt')) {
             this.loggedIn = true;
           }
-          const userId = localStorage.getItem('userId');
         },
         methods: {
           logout() {
             Cookies.remove('jwt');
             localStorage.removeItem('userId');
+            localStorage.removeItem('pokeFavsUser');
             this.$router.push('/user/login');
           }
         }
