@@ -186,13 +186,9 @@
 .container-pokemon-detail {
     display: flex;
     justify-content: center;
-    min-height: 91.5vh;
-    margin-top: 7.5vh;
 }
 @media screen and (min-width: 768px) {
     .container-pokemon-detail {
-        min-height: 92.5vh;
-        margin-top: 6.5vh;
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
@@ -202,6 +198,7 @@
     }
     .pokemon-detail-view {
         width: 100%;
+        height: 100%;
     }
     .left-sprite img {
         height: 400px;

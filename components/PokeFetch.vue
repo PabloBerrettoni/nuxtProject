@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-div-pokefetch">
         <div class="pokeCardsHolder">
             <PokeCard v-for="pokemon in pokemons" :key="pokemon.name" :sprite="pokemon.sprite" :name="pokemon.name"
                 :type1="pokemon.type1" :type2="pokemon.type2 ? pokemon.type2 : '-'" />
@@ -53,10 +53,17 @@ export default {
 </script>
 
 <style>
+.main-div-pokefetch {
+    min-height: 100%;
+    min-width: 100%;
+}
 .pokeCardsHolder {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    min-height: 80vh;
+    min-width: 100%;
+    min-height: 90vh;
+    margin: auto;
+    max-width: 1550px;
 }
 </style>

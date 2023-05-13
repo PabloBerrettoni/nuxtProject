@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <Search class="search"/>
         <PokeFetch/>
     </div>
 </template>

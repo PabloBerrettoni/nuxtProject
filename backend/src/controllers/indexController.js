@@ -196,7 +196,6 @@ module.exports = {
         } catch (e) {
             return res.status(401).send({message: 'error'});
         };
-
     },
 
     deletePokeFav: async (req, res) => {

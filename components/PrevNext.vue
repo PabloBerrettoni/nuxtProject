@@ -34,7 +34,7 @@ export default {
     },
     mounted() {
         let lastOffset = localStorage.getItem('lastKnownOffset');
-        if (lastOffset !== null && lastOffset !== 0 && lastOffset !== this.offset) {
+        if (lastOffset !== null && lastOffset !== 0) {
             this.offset = Number(lastOffset);
         }
     }

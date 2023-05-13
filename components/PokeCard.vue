@@ -108,13 +108,12 @@
     .pokeCard {
         background-color: #fefae0;
         border-radius: 5%;
-        border-radius: 10px;
         margin: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        max-width: 350px;
+        max-height: 455px;
     }
     .img-button-container {
         position: relative;
@@ -123,6 +122,7 @@
     }
     .text {
         text-align: center;
+        font-size: 1.2rem;
     }
     .addPokemon {
         position: absolute;
