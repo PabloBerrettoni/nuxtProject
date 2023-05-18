@@ -1,6 +1,6 @@
 <template>
     <div class="nuxtMainDiv">
-        <AppHeader :key="$route.fullPath"/>  
+        <AppHeader :key="$route.fullPath"/>
         <Nuxt class="nuxt-main-container"/>
         <Footer/>
     </div>

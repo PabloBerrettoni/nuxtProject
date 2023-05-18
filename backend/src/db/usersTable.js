@@ -3,17 +3,17 @@ require("dotenv").config();
 
 const pool = mysql.createPool({
     connectionLimit: 10,
-    password: process.env.DB_PASSWORD,
-    user: process.env.DB_USER,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
 
 let usersTable = async () => {
     try {
         const connection = await pool.getConnection();
-        await connection.query('USE pokenuxt');
+        await connection.query(`USE ${process.env.DB_NAME}`);
         const [rows] = await connection.query('SHOW TABLES LIKE "users"');
 
         if (rows.length === 0) {

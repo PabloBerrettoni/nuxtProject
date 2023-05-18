@@ -90,3 +90,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Mysql data created with the use of docker
+/mysql_data

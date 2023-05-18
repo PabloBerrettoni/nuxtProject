@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 require("dotenv").config();
-const port = process.env.APP_PORT;
+const port = 3001;
 const db = require('./db/db.js');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // Enable CORS for all routes
 app.use(cors());
-
 // Initializes the database
 db.initializeDatabase();
 

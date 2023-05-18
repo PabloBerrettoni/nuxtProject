@@ -1,4 +1,8 @@
 version: '3'
+
+networks:
+  my_network:
+
 services:
   app:
     image: "node:16-slim"
@@ -11,3 +15,31 @@ services:
     environment:
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=3000
+    networks:
+      - my_network
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - backend/.env
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    networks:
+      - my_network
+
+  db:
+    image: mysql:8.0.33-debian
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - backend/.env
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - my_network
