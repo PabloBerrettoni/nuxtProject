@@ -2,6 +2,8 @@
 
 ## Docker Setup
 
+1) Fill the .env file located in /backend
+2) 
 ```bash
 $ docker-compose up
 ```
