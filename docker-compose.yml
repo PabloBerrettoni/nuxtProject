@@ -27,6 +27,7 @@ services:
       - 3001:3001
     volumes:
       - ./backend:/app
+      - /app/node_modules
     depends_on:
       - db
     networks:
@@ -40,6 +41,6 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - 3307:3306
     networks:
       - my_network

@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install mysql@latest && \
+RUN npm i -g nodemon && \
     npm install
 
 # Copy the rest of the application source code to the container
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 3001
 
 # Start the application with nodemon
-CMD ["npx", "nodemon", "src/app.js"]
+CMD ["nodemon"]

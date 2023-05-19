@@ -45,7 +45,7 @@ module.exports = {
 
         pokenuxtdb.create = (userData) => {
             return new Promise((resolve, reject) => {
-                pool.query('INSERT INTO pokenuxt.users SET ?', userData, (err, results) => {
+                pool.query(`INSERT INTO users SET ?`, userData, (err, results) => {
                     if (err) {
                         return reject(err);
                     }
@@ -70,7 +70,7 @@ module.exports = {
                     if (err) {
                         return reject(err);
                     }
-                    connection.query('SELECT * FROM pokenuxt.users WHERE email = ?', email, (err, results) => {
+                    connection.query(`SELECT * FROM users WHERE email = ?`, email, (err, results) => {
                         connection.release();
                         if (err) {
                             return reject(err);
@@ -137,7 +137,7 @@ module.exports = {
                         if (err) {
                             return reject(err);
                         }
-                        connection.query('SELECT * FROM pokenuxt.users WHERE id = ?', userId, (err, results) => {
+                        connection.query('SELECT * FROM users WHERE id = ?', userId, (err, results) => {
                             connection.release();
                             if (err) {
                                 return reject(err);
@@ -181,7 +181,7 @@ module.exports = {
             let pokenuxtdb = {};
             pokenuxtdb.create = (data) => {
                 return new Promise((resolve, reject) => {
-                    pool.query('INSERT INTO pokenuxt.pokefavs SET ?', data, (err, results) => {
+                    pool.query('INSERT INTO pokefavs SET ?', data, (err, results) => {
                         if (err) {
                             return reject(err);
                         }
@@ -217,7 +217,7 @@ module.exports = {
             let pokenuxtdb = {};
             pokenuxtdb.delete = (data) => {
                 return new Promise((resolve, reject) => {
-                    pool.query('DELETE FROM pokenuxt.pokefavs WHERE pokeName = ? AND user = ?', [data.pokeName, data.user], (err, results) => {
+                    pool.query('DELETE FROM pokefavs WHERE pokeName = ? AND user = ?', [data.pokeName, data.user], (err, results) => {
                         if (err) {
                             return reject(err);
                         }
