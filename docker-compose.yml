@@ -4,17 +4,15 @@ networks:
   my_network:
 
 services:
-  app:
-    image: "node:16-slim"
-    working_dir: /app
-    command: bash -c "npm install && npm run dev"
-    volumes:
-      - ./:/app
+  frontend:
+    build:
+      context: .
     ports:
       - 3000:3000
     environment:
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=3000
+    restart: always
     networks:
       - my_network
 
@@ -26,10 +24,11 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend:/backend
+      - /backend/node_modules
     depends_on:
       - db
+    restart: always
     networks:
       - my_network
 
@@ -42,5 +41,6 @@ services:
       - ./mysql_data:/var/lib/mysql
     ports:
       - 3307:3306
+    restart: always
     networks:
       - my_network

@@ -12,8 +12,21 @@ const pool = mysql.createPool({
 });
 
 async function createDatabase() {
+    let connection;
+    let isConnected = false;
+
+    while (!isConnected) {
+        try {
+            connection = await pool.getConnection();
+            isConnected = true;
+        } catch (err) {
+            console.error('Error connecting to database:', err.message);
+            // Wait for 2 seconds before retrying
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+    }
+
     try {
-        const connection = await pool.getConnection();
         await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`);
         connection.release();
         console.log('Database created or already exists');
