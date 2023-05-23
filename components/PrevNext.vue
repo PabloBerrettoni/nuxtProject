@@ -28,12 +28,12 @@ export default {
             } else if (operation == 'coming1') {
                 this.offset += 20;
             }
-            localStorage.setItem('lastKnownOffset', this.offset);
+            sessionStorage.setItem('lastKnownOffset', this.offset);
             this.$emit('prevNext', this.offset);
         }
     },
     mounted() {
-        let lastOffset = localStorage.getItem('lastKnownOffset');
+        let lastOffset = sessionStorage.getItem('lastKnownOffset');
         if (lastOffset !== null && lastOffset !== 0) {
             this.offset = Number(lastOffset);
         }

@@ -1,7 +1,15 @@
 <template>
-    <div>
-        <p>Username: {{this.username}}</p>
-        <p>Email: {{this.email}}</p>
+    <div class="profile-main">
+        <div class="profile-user-info">
+            <p>Username: {{this.username}}</p>
+            <p>Email: {{this.email}}</p>
+        </div>
+        <h2>FAVOURITE POKEMONS:</h2>
+        <div class="slider-container">
+            <div class="poke-favs-container">
+                <PokeCard v-for="pokemon in pokeFavs" :key="pokemon.name" :sprite="pokemon.sprite" :name="pokemon.name" :type1="pokemon.type1" :type2="pokemon.type2 ? pokemon.type2 : '-'" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -12,7 +20,7 @@
         return {
             username: "",
             email: "",
-            PokeFavs: []
+            pokeFavs: []
         };
     },
     async mounted() {
@@ -25,6 +33,23 @@
             const userData = await this.$axios.post("http://localhost:3001/userData", { userId });
             this.username = userData.data.username;
             this.email = userData.data.email;
+
+            const userPokeFavs = localStorage.getItem("pokeFavsUser");
+            const pokeFavsArray = JSON.parse(userPokeFavs);
+            for (let pokemon of pokeFavsArray) {
+                const pokeData = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+                const pokeInfo = {
+                    name: pokeData.data.name,
+                    sprite: pokeData.data.sprites.front_default,
+                    type1: pokeData.data.types[0].type.name,
+                    type2: pokeData.data.types[1] ? pokeData.data.types[1].type.name : undefined
+                };
+                if (pokeData.data.types[1] != null && (pokeData.data.types[1].type.name == 'flying' || pokeData.data.types[1].type.name == 'fairy')) {
+                    pokeInfo.type1 = pokeData.data.types[1].type.name;
+                    pokeInfo.type2 = pokeData.data.types[0].type.name;
+                };
+                this.pokeFavs.push(pokeInfo);
+            }
         } catch (e) {
             console.log(e);
         };
@@ -33,6 +58,19 @@
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.profile-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-container {
+    width: 90%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.poke-favs-container {
+    display: flex;
+    flex-direction: row;
+}
 </style>

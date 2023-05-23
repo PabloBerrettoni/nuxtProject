@@ -16,7 +16,7 @@ export default {
         }
     },
     async mounted() {
-        let lastOffset = localStorage.getItem('lastKnownOffset');
+        let lastOffset = sessionStorage.getItem('lastKnownOffset');
         if (lastOffset !== null && lastOffset !== 0) {
             this.lastOffsetKnown = lastOffset;
             this.getDataOnOffset(lastOffset);

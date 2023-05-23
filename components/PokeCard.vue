@@ -114,6 +114,7 @@
         justify-content: center;
         align-items: center;
         max-height: 455px;
+        max-width: 250px;
     }
     .img-button-container {
         position: relative;
