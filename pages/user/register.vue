@@ -39,7 +39,7 @@
         methods: {
             async registerUser() {
                 try {
-                    const response = await this.$axios.post('http://localhost:3001/createUser', this.user);
+                    const response = await this.$axios.post('/createUser', this.user);
                     console.log(response.data);
                     await this.$router.push('/user/login');
                 } catch (error) {

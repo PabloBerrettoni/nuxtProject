@@ -63,10 +63,10 @@
                 // updating the pokemon to the list of favourites
                 let pokeFavsUser = localStorage.getItem('pokeFavsUser') ? JSON.parse(localStorage.getItem('pokeFavsUser')) : [];
                 if (pokeFavsUser.includes(name)) {
-                    await this.$axios.delete(`http://localhost:3001/deletePokeFav`, { data: this.pokeFavs });
+                    await this.$axios.delete(`/deletePokeFav`, { data: this.pokeFavs });
                     pokeFavsUser = pokeFavsUser.filter(item => item !== name);
                 } else {
-                    await this.$axios.post(`http://localhost:3001/addPokeFav`, this.pokeFavs);
+                    await this.$axios.post(`/addPokeFav`, this.pokeFavs);
                     pokeFavsUser.push(name);
                 };
                 localStorage.setItem('pokeFavsUser', JSON.stringify(pokeFavsUser));

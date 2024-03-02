@@ -1,32 +1,36 @@
-# nuxtProject
+# NuxtProject
 
 ## Docker Setup
 
-1) Fill the .env file located in /backend
-2) 
-```bash
-$ docker-compose up
-```
+1. Fill the `.env` file located in `/backend`.
+2. Update the base URL with the domain for the backend `nuxt.config.js`.
+3. Run the following command:
+    ```bash
+    $ docker-compose up
+    ```
 
-## Dev Setup
+## Development Setup
 
 ```bash
-# install dependencies
-$ npm install (using node 16)
-# install backend dependencies in ~/backend
+# Update base URL to localhost in `nuxt.config.js`
+# Install dependencies
+$ npm install (using Node.js 16)
+# Install backend dependencies in `~/backend`
 $ npm install
 
-# serve with hot reload at localhost:3000
+# Serve with hot reload at localhost:3000
 $ npm run dev
-# serve backend with nodemon, listens in port 3001 (can change that in the enviroment files)
+# Serve backend with nodemon, listening on port 3001 (can be changed in the environment files)
 $ nodemon
 
-# build for production and launch server
+# Build for production and launch server
 $ npm run build
 $ npm run start
 
-# generate static project
+# Generate static project
 $ npm run generate
-```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+
+Feel free to adjust it further to fit your preferences!
+

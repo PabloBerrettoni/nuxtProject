@@ -42,6 +42,10 @@ export default {
       '@nuxtjs/axios',
   ],
 
+  axios: {
+    baseURL: 'https://www.pablo-berrettoni.top/api', // Specify your backend URL here https://DOMAIN/api or http://localhost:3001/api 
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

@@ -7,7 +7,13 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['POST', 'GET', 'OPTIONS', 'DELETE'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+    credentials: true
+  }));
+
 // Initializes the database
 db.initializeDatabase();
 

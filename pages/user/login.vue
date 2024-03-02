@@ -35,7 +35,7 @@
         methods: {
             async loginUser() {
                 try {
-                    const response = await this.$axios.post("http://localhost:3001/loginUser", this.user);
+                    const response = await this.$axios.post("/loginUser", this.user);
                     const token = response.data.token;
                     Cookies.set("jwt", token);
                     localStorage.setItem('userId', response.data.userId);

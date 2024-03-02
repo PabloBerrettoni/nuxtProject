@@ -1,8 +1,8 @@
 <template>
     <div class="profile-main">
         <div class="profile-user-info">
-            <p>Username: {{this.username}}</p>
-            <p>Email: {{this.email}}</p>
+            <p>Username: {{ username }}</p>
+            <p>Email: {{ email }}</p>
         </div>
         <h2>FAVOURITE POKEMONS:</h2>
         <div class="slider-container">
@@ -16,46 +16,46 @@
 <script>
     import Cookies from 'js-cookie';
     export default {
-    data() {
-        return {
-            username: "",
-            email: "",
-            pokeFavs: []
-        };
-    },
-    async mounted() {
-        if (!Cookies.get("jwt")) {
-            alert("You are not logged in!");
-            this.$router.push("/");
-        }
-        try {
-            const userId = localStorage.getItem("userId");
-            const userData = await this.$axios.post("http://localhost:3001/userData", { userId });
-            this.username = userData.data.username;
-            this.email = userData.data.email;
-
-            const userPokeFavs = localStorage.getItem("pokeFavsUser");
-            const pokeFavsArray = JSON.parse(userPokeFavs);
-            for (let pokemon of pokeFavsArray) {
-                const pokeData = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-                const pokeInfo = {
-                    name: pokeData.data.name,
-                    sprite: pokeData.data.sprites.front_default,
-                    type1: pokeData.data.types[0].type.name,
-                    type2: pokeData.data.types[1] ? pokeData.data.types[1].type.name : undefined
-                };
-                if (pokeData.data.types[1] != null && (pokeData.data.types[1].type.name == 'flying' || pokeData.data.types[1].type.name == 'fairy')) {
-                    pokeInfo.type1 = pokeData.data.types[1].type.name;
-                    pokeInfo.type2 = pokeData.data.types[0].type.name;
-                };
-                this.pokeFavs.push(pokeInfo);
+        data() {
+            return {
+                username: "",
+                email: "",
+                pokeFavs: []
+            };
+        },
+        async mounted() {
+            if (!Cookies.get("jwt")) {
+                alert("You are not logged in!");
+                this.$router.push("/");
             }
-        } catch (e) {
-            console.log(e);
-        };
-    },
-    methods: {}
-}
+            try {
+                const userId = localStorage.getItem("userId");
+                const userData = await this.$axios.post("/userData", { userId });
+                this.username = userData.data.username;
+                this.email = userData.data.email;
+
+                const userPokeFavs = localStorage.getItem("pokeFavsUser");
+                const pokeFavsArray = JSON.parse(userPokeFavs);
+                for (let pokemon of pokeFavsArray) {
+                    const pokeData = await this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+                    const pokeInfo = {
+                        name: pokeData.data.name,
+                        sprite: pokeData.data.sprites.front_default,
+                        type1: pokeData.data.types[0].type.name,
+                        type2: pokeData.data.types[1] ? pokeData.data.types[1].type.name : undefined
+                    };
+                    if (pokeData.data.types[1] != null && (pokeData.data.types[1].type.name == 'flying' || pokeData.data.types[1].type.name == 'fairy')) {
+                        pokeInfo.type1 = pokeData.data.types[1].type.name;
+                        pokeInfo.type2 = pokeData.data.types[0].type.name;
+                    };
+                    this.pokeFavs.push(pokeInfo);
+                }
+            } catch (e) {
+                console.log(e);
+            };
+        },
+        methods: {}
+    }
 </script>
 
 <style scoped>
